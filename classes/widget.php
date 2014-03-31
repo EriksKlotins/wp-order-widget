@@ -28,7 +28,7 @@ class WtfOrderWidget extends WP_Widget {
 	function registerScripts()
 	{
 		wp_enqueue_script('jquery');
-		wp_register_script('wtf-order-widget-widget.js',content_url().'/plugins/order-widget/assets/js/widget.js');
+		wp_register_script('wtf-order-widget-widget.js',content_url().'/plugins/wp-order-widget/assets/js/widget.js');
 		wp_localize_script( 'wtf-order-widget-widget.js', 'ajaxurl',admin_url( 'admin-ajax.php' ) );
 		wp_enqueue_script('wtf-order-widget-widget.js');
 	}
