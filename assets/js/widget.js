@@ -22,9 +22,13 @@
 
 			var data = 
 			{
-				mail  : $('input[name="email"]', widgetNode).val(),
-				name  : $('input[name="name"]', widgetNode).val(),
-				rows  : list
+				mail  	  : $('input[name="email"]', widgetNode).val(),
+				name  	  : $('input[name="name"]', widgetNode).val(),
+				phone 	  : $('input[name="phone"]', widgetNode).val(),
+				company   : $('input[name="company"]', widgetNode).val(),
+				delivery  : $('input[name="delivery"]', widgetNode).val(),
+				comment   : $('input[name="comment"]', widgetNode).val(),
+				rows  	  : list
 			}
 			window.localStorage.setItem('WTFOrderWidget',JSON.stringify(data));
 		}
@@ -42,6 +46,10 @@
 			var rows = data.rows;
 			$('input[name="email"]', widgetNode).val(data.mail);
 			$('input[name="name"]', widgetNode).val(data.name);
+			$('input[name="phone"]', widgetNode).val(data.phone);
+			$('input[name="company"]', widgetNode).val(data.company);
+			$('input[name="delivery"]', widgetNode).val(data.delivery);
+			$('input[name="comment"]', widgetNode).val(data.comment);
 			for(var i=0;i<rows.length;i++)
 			{
 				addRow(rows[i].code, rows[i].qty);
@@ -91,14 +99,18 @@
 		{
 			var data = 
 			{
-				mail  : $('input[name="email"]', widgetNode).val(),
-				name  : $('input[name="name"]', widgetNode).val(),
-				
+				mail      : $('input[name="email"]', widgetNode).val(),
+				name      : $('input[name="name"]', widgetNode).val(),
+				phone 	  : $('input[name="phone"]', widgetNode).val(),
+				company   : $('input[name="company"]', widgetNode).val(),
+				delivery  : $('input[name="delivery"]', widgetNode).val(),
+				comment   : $('input[name="comment"]', widgetNode).val(),
+
 				rows  : JSON.stringify(getValues().rows),
 				action: 'wtf_order_widget_submit'
 			};
 			$.post(ajaxurl, data, function(response) {
-				alert('Order submitted!');
+				alert('Pasūtījums nosūtīts!');
 				removeAll();
 				//alert('Got this from the server: ' + response);
 			});
@@ -112,7 +124,7 @@
 			$('#wtf-ev-add-more').click(onAddMoreClick);
 			$('#wtf-ev-remove-all').click(onRemoveAllClick);
 			$('#wtf-ev-submit').click(onFormSubmit);
-			$('input[name="qty"], input[name="code"], input[name="email"], input[name="name"]', widgetNode).live('blur',onFieldExit)
+			$('input[name="qty"], input[name="code"], input[name="email"], input[name="name"], input[name="phone"], input[name="company"], input[name="delivery"], input[name="comment"]', widgetNode).live('blur',onFieldExit)
 			readValues();
 		}
 

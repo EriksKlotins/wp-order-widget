@@ -24,18 +24,28 @@ function wtf_order_widget()
 
 function handleSubmitData()
 {
-	ob_clean();
-	$mail = $_POST['mail'];
-	$name = $_POST['name'];
+	
+  ob_clean();
+	$mail        = $_POST['mail'];
+	$name        = $_POST['name'];
+  $phone       = $_POST['phone'];
+  $company     = $_POST['company'];
+  $delivery    = $_POST['delivery'];
+  $comment     = $_POST['comment'];
 	$admin_email = get_settings('admin_email');
     
-    $content = [
-    				'You have a new order from: '.$name,
+    $content = array(
+    				'You have a new order!',
+            'Name: '.$name,
     				'Email: '.$mail,
+            'Phone: '.$phone,
+            'Company: '.$company,
+            'Delivery date: '.$delivery,
+            'Comment: '.$comment,
     				'Date: '.date('d/m/Y'),
     				'',
     				'Items: (code, quantity)'
-       			];
+       		);
 
 
     $rows = json_decode(stripslashes($_POST['rows']));
@@ -47,11 +57,13 @@ function handleSubmitData()
 
    	$content = implode(chr(10).chr(32), $content);
   // 	echo $content;
-    wp_mail($admin_email,'New order: '.get_bloginfo('name'),  $content);
+    $a =  wp_mail($admin_email,'Jauns pasūtījums: '.get_bloginfo('name'),  $content);
+    $b = wp_mail($mail,'Jūsu pasūtījums: '.get_bloginfo('name'),  $content);
+    var_dump($a, $b);
+    ob_flush();
     die();
 }
 
-
 add_action( 'widgets_init', 'wtf_order_widget' );
 add_action( 'wp_ajax_wtf_order_widget_submit', 'handleSubmitData');
-add_action( 'wp_ajax_nopriv_mywtf_order_widget_submit', 'handleSubmitData' );
+add_action( 'wp_ajax_nopriv_wtf_order_widget_submit', 'handleSubmitData' );

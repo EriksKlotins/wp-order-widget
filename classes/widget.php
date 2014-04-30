@@ -20,7 +20,7 @@ class WtfOrderWidget extends WP_Widget {
 			$this->settings = $this->getDefaultSettings();
 		}
 
-		add_action( 'wp_enqueue_scripts', [&$this,'registerScripts'] );
+		add_action( 'wp_enqueue_scripts', array(&$this,'registerScripts') );
 
 		
 	}
@@ -53,7 +53,7 @@ class WtfOrderWidget extends WP_Widget {
 	{
 
 		$result = new stdClass();
-		$result->title = 'Order Widget';
+		$result->title = 'Pasūtījumu forma';
 		return $result;
 	}
 
@@ -67,7 +67,7 @@ class WtfOrderWidget extends WP_Widget {
 		{		
 			update_option($title_option_name, $_POST['widget-pasakumi-title']);
 		}
-		$title = get_option($title_option_name,"Pasākumi");
+		$title = get_option($title_option_name,"Pasūtījumi");
 
 		?>
 		<p>
